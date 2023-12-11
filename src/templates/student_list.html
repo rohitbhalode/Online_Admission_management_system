@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            margin: 0;
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Data Display</h1>
+    <a class="logout-button" href="/admin/logout">Logout</a>
+
+    
+    <table>
+        <tr>
+            {% for key in keys %}
+                <th>{{ key }}</th>
+            {% endfor %}
+            <th>Action</th>
+        </tr>
+        
+        {% for row in data %}
+            <tr>
+                {% for key in keys %}
+                    <td>{{ row[key] }}</td>
+                {% endfor %}
+                <td>
+                    <!-- Add your form for the action here -->
+                    <form method="post" action="{{ url_for('admin.action') }}">
+                        <input type="hidden" name="email" value="{{ row['email'] }}">
+                        <button type="submit">Action</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <!-- <script>
+        // Define a JavaScript function to handle the button action
+        function performAction(email) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/admin/action', true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            alert(response.result);
+                        } else {
+                            alert('Error: ' + response.error);
+                        }
+                    }
+                }
+            };
+
+            var data = JSON.stringify({ 'email': email });
+            xhr.send(data);
+        }
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!-- admin_login.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Login - College Website</title>
+  <link rel="stylesheet" href="static/home.css"> <!-- Include specific CSS for the admin login page if needed -->
+    <style>
+        /* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #333;
+    padding: 10px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 20px auto;
+    gap: 20px;
+}
+
+.notifications {
+    flex: 1;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+.notification {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-section {
+    flex: 2;
+}
+
+.container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.container h1 {
+    text-align: center;
+    color: #444;
+}
+
+.container p {
+    color: #666;
+}
+
+.facility {
+    flex: 1;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+.facility h2 {
+    color: #444;
+    text-align: center;
+}
+
+.facility p {
+    color: #666;
+}
+
+/* styles.css */
+
+.login-form {
+    margin: auto;
+    width: 300px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 50px; /* Adjust the margin to provide space between the navbar and the login container */
+}
+
+
+.login-form h2 {
+    text-align: center;
+    color: #444;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-form input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #555;
+}
+
+footer {
+    text-align: center;
+    background-color: #333;
+    padding: 10px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.flash {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+/* Style for success messages */
+.flash.success {
+    color: #fff;
+    background-color: #ff0000; /* Red background color */
+    border-color: #ff0000; /* Red border color */
+}
+
+    </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Admissions</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li class="current"><a href="/admin/admin_login">Admin Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <div class="login-form">
+      <h2>Admin Login</h2>
+      <form action="/admin/login" method="post">
+        <label for="admin_id">Admin ID:</label>
+        <input type="text" id="admin_id" name="admin_id" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <input type="submit" value="Login">
+      </form>
+      {% with message = get_flashed_messages(category_filter=['success2']) %}
+      {% if message %}
+        <div class="flash">
+          {{ message[0] }}
+          {% endif %}
+          <div>
+      {% endwith %}
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 College Website. All rights reserved.</p>
+  </footer>
+</body>
+</html>

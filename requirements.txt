@@ -1,0 +1,8 @@
+flask
+mysql-connector-python
+pymongo 
+bcrypt
+sqlalchemy
+secure-smtplib
+pyotp
+python-dotenv

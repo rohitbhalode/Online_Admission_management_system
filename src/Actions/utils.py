@@ -28,7 +28,6 @@ class UniqueID():
                 empty+='0'
             a=empty+a
         UniqueID=str(self.currentYear)+a
-        print(UniqueID)
         return UniqueID
     
 
@@ -39,7 +38,7 @@ class InterviewScheduler:
         self.start_date = start_date
         self.current_date = start_date
         self.daily_slot_counter = 0
-        self.daily_limit = 2
+        self.daily_limit = 20
 
     def reset_daily_counter(self):
         # Reset the counter at the beginning of each day

@@ -86,7 +86,7 @@ def insert_registration_data(l,unique_id):
     try:
         pwd=bytes(l[5],'utf-8')
         hashed=bcrypt.hashpw(pwd,bcrypt.gensalt())
-        new_User=User(F_name=l[0].upper(),L_name=l[1].upper(),Mobile_NO=l[2],email=l[3],Registration_Id=unique_id,Password=hashed)
+        new_User=User(F_name=l[0].upper(),L_name=l[1].upper(),Mobile_NO=l[2],email=l[3],Registration_Id=unique_id,Password=hashed,Approval="Pending")
         new_Personal_detail=Personal_detail(first_name=l[0].upper(),last_name=l[1].upper(),email=l[3])
         new_Education_detail=Education_detail(email=l[3])
         # new_Communication_detail=Communication_detail(email=l[3])
@@ -167,19 +167,26 @@ def update_data(email, data):
 
 
         
-#         session.commit()
-#         session.close()    
+        session.commit()
+        session.close()    
             
         
 
 
 def login_validation(Username, Password):
+    print("we are in login_validation")
     user = db_session.query(User).filter(User.email == Username).first()
-    stored_password=user.Password
+    if user is None : 
+        return False
+    try:
+        stored_password=user.Password
+    except Exception as e:
+        print(e)
     stored_password_bytes = stored_password.encode('utf-8')
     if bcrypt.checkpw(Password.encode('utf-8'),stored_password_bytes):
         return retrive_data(Username)
     else :
+        logger.info("Username and Password does found")
         return False
     
     
@@ -280,7 +287,7 @@ def retrive_data(Username):
         user = db_session.query(User).filter(User.email == Username).first()
         personal_detail=db_session.query(Personal_detail).filter(Personal_detail.email == Username).first()
         education_detail=db_session.query(Education_detail).filter(Education_detail.email == Username).first()
-        
+        print(user)
         db_session.close()
         user_data={"name" :user.F_name+" "+user.L_name,'id': user.Registration_Id,"form_status":user.form_status,"first_name":personal_detail.first_name,
                    "last_name":personal_detail.last_name,"father_name":personal_detail.father_name,"mother_name":personal_detail.mother_name,

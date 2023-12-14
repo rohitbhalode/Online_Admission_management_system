@@ -31,8 +31,12 @@ def login():
     if request.method == 'POST':
         Username = request.form.get("username")
         Password = request.form.get("password")
+        # print("Username",Username)
+        # print("Password",Password)
         try: 
+            # print("we are in try block")
             user_data=login_validation(Username, Password)
+            # print("USer_data",user_data)
         except Exception as e: 
             return "Please refresh page database server is slow"
         # user_data=user_data.upper()

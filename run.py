@@ -1,3 +1,3 @@
-from src import app
+import src
 
-app.run(debug=True)
+src.app.run(debug=True,host='0.0.0.0')

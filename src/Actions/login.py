@@ -19,9 +19,10 @@ def login():
         active_tab = request.args.get('active_tab','personal')
         
         logger.info('User is in session reloading the page.')
-        
+        print("we are in user session ")
         
         user_data=login_validation(session['user'] , session['Password'])
+        print(user_data)
         # mod.config['user_data']=user_data
         if user_data['form_status']=="Submitted":
             return render_template('form_submited.html')
@@ -42,11 +43,11 @@ def login():
         # user_data=user_data.upper()
         # session['user_data'] = user_data
         logger.info(f'User: {Username} is login to server ')
-        
+        print(user_data)
         if user_data:
             active_tab = request.args.get('active_tab', 'personal')
             
-            
+            print("we are in if")
             session['user'] = Username
             session['Password'] = Password
             if user_data['form_status']=="Submitted":

@@ -109,66 +109,69 @@ def insert_registration_data(l,unique_id):
 
 def update_data(email, data):
     if data['tabName']=='personal':
-        logger.info("we are in update data personal detail")
-        update_personal = db_session.query(Personal_detail).filter(Personal_detail.email == email).first()
+        try:
+            logger.info("we are in update data personal detail")
+            update_personal = db_session.query(Personal_detail).filter(Personal_detail.email == email).first()
+            
+            # print(data['first_name'])
+            update_personal.first_name=data['first_name'].upper()
+            update_personal.last_name=data['last_name'].upper()
+            update_personal.mother_name=data['mother_name'].upper()
+            update_personal.father_name=data['father_name'].upper()
+            update_personal.DOB=data['date_of_birth']
+            update_personal.gender=data['gender']
+            update_personal.category=data['category']
         
-        # print(data['first_name'])
-        update_personal.first_name=data['first_name'].upper()
-        update_personal.last_name=data['last_name'].upper()
-        update_personal.mother_name=data['mother_name'].upper()
-        update_personal.father_name=data['father_name'].upper()
-        update_personal.DOB=data['date_of_birth']
-        update_personal.gender=data['gender']
-        update_personal.category=data['category']
-       
-        db_session.commit()
-        db_session.close()
+            db_session.commit()
+            db_session.close()
+        except Exception as e: 
+            logger.info("There is error in personal update tab",e)
+            db_session.rollback()
 
     if data['tabName']=='communication':
-        logger.info("we are in update data communication detail")
-        
-        update_personal = db_session.query(Personal_detail).filter(Personal_detail.email == email).first()
-        
-        # print(data['first_name'])
-        update_personal.mobile_no=data['phone_number'].upper()
-        update_personal.address=data['address'].upper()
-        update_personal.district=data['district'].upper()
-        update_personal.state=data['State']
-        update_personal.pincode=data['pincode']
-        
-        db_session.commit()
-        db_session.close()
+        try:
+            logger.info("we are in update data communication detail")
+            
+            update_personal = db_session.query(Personal_detail).filter(Personal_detail.email == email).first()
+            
+            # print(data['first_name'])
+            update_personal.mobile_no=data['phone_number'].upper()
+            update_personal.address=data['address'].upper()
+            update_personal.district=data['district'].upper()
+            update_personal.state=data['State']
+            update_personal.pincode=data['pincode']
+            
+            db_session.commit()
+            db_session.close()
+        except Exception as e: 
+            logger.info("There is error in communication update tab",e)
+            db_session.rollback()
 
     if data['tabName']=='education':
-        logger.info("we are in update data education detail")
+        try:
+            logger.info("we are in update data education detail")
 
-        update_education = db_session.query(Education_detail).filter(Education_detail.email == email).first()
-        
-        # print(data['first_name'])
-        update_education.ssc_school_name=data['ssc_school_name'].upper()
-        update_education.ssc_Passing_year=data['ssc_Passing_year'].upper()
-        update_education.ssc_rollno=data['ssc_rollno'].upper()
-        update_education.ssc_Percentage=data['ssc_Percentage']
-        update_education.hsc_school_name=data['hsc_school_name'].upper()
-        update_education.hsc_Passing_year=data['hsc_Passing_year']
-        update_education.hsc_rollno=data['hsc_rollno']
-        update_education.hsc_Percentage=data['hsc_Percentage']
-        update_education.exam_name=data['exam_name'].upper()
-        update_education.exam_rollno=data['exam_rollno']
-        update_education.exam_Percentage=data['exam_Percentage']
-        update_education.course=data['course']
+            update_education = db_session.query(Education_detail).filter(Education_detail.email == email).first()
+            print(update_education)
+            # print(data['first_name'])
+            update_education.ssc_school_name=data['ssc_school_name'].upper()
+            update_education.ssc_Passing_year=data['ssc_Passing_year'].upper()
+            update_education.ssc_rollno=data['ssc_rollno'].upper()
+            update_education.ssc_Percentage=data['ssc_Percentage']
+            update_education.hsc_school_name=data['hsc_school_name'].upper()
+            update_education.hsc_Passing_year=data['hsc_Passing_year']
+            update_education.hsc_rollno=data['hsc_rollno']
+            update_education.hsc_Percentage=data['hsc_Percentage']
+            update_education.exam_name=data['exam_name'].upper()
+            update_education.exam_rollno=data['exam_rollno']
+            update_education.exam_Percentage=data['exam_Percentage']
+            update_education.course=data['course']
+            db_session.commit()
+            db_session.close()    
+        except Exception as e: 
+            logger.info("There is error in eduactioin update tab",e)
+            db_session.rollback()
 
-        
-
-
-
-
-
-
-
-        
-        session.commit()
-        session.close()    
             
         
 

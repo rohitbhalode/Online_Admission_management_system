@@ -18,6 +18,11 @@ app.register_blueprint(admin.mod)
 
 @app.route('/')
 def home():
+    if "user" in session:
+        user=session['user']
+        logger.info(f'The user is getting logout from session {user}.')
+        
+        session.pop('user', None)
     #Here college website home page is rendering 
     logger.info("Home page is opened")
     return render_template('home.html')
